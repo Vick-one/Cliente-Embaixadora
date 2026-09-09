@@ -466,6 +466,9 @@ details .corpo{padding:0 0 16px}
 .hist-res div{text-align:center}
 .hist-res b{display:block;font-family:var(--ds);font-size:27px;font-weight:600;color:var(--vinho);line-height:1}
 .hist-res span{display:block;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--fraca);margin-top:7px}
+.btn-hist-toggle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 24px;margin:0 0 4px;border:1.5px solid var(--linha);background:#fff;font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--vinho);cursor:pointer;transition:background .2s,border-color .2s}
+.btn-hist-toggle:hover{background:var(--bege);border-color:var(--rosa)}
+.btn-hist-toggle.aberto svg{transform:rotate(180deg)}
 @media (max-width:900px){
   .hist-res{grid-template-columns:1fr;gap:14px;padding:16px}
   .hist-res b{font-size:23px}
@@ -770,7 +773,8 @@ details .corpo{padding:0 0 16px}
     <h2>Histórico de vouchers</h2>
     <p class="ss">Atualizado toda segunda-feira. A meta é sempre 2 cupons usados na semana.</p>
     <div class="hist-res" id="hist-resumo"></div>
-    <div id="historico"></div>
+    <button class="btn-hist-toggle" id="btn-hist" onclick="toggleHist()">Resultado dos desafios <svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-1px"><path d="m6 9.5 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div id="historico" style="display:none"></div>
   </div>
 
   <div class="mat-des" id="mat-des" data-mat="sim">
@@ -1016,6 +1020,7 @@ var HIST = [{"s": "Semana 10 · 01 a 07 de setembro", "t": [["MALU10", 21], ["VI
 var cupom = "SEUCUPOM", filtro = "tudo", aberta = 0;
 function img(k){ return IMG[k] || IMG[String(k).replace(/\.(jpg|png)$/,"")] || ""; }
 function esc(t){ return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function toggleHist(){var h=document.getElementById("historico"),b=document.getElementById("btn-hist");if(h.style.display==="none"){h.style.display="";b.classList.add("aberto")}else{h.style.display="none";b.classList.remove("aberto")}}
 
 /* ---------- navegação (mantida do portal atual) ---------- */
 var GRUPO = {inicio:"inicio",vendas:"vendas",desafios:"desafios",mensagens:"materiais",imagem:"materiais",skincare:"produtos",make:"produtos"};
